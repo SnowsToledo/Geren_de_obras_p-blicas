@@ -1,0 +1,11 @@
+body{
+    background-color: black;
+}
+.Chama{
+    width: 80%;
+    margin: auto;
+    margin-top: 50px;
+    text-align: center;
+    font: 23px black;
+    background-color: orange;
+}
