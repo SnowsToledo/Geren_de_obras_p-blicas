@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package exemplopi;
 
 import java.io.*;
@@ -12,17 +8,9 @@ import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author 05135096159
- */
 public class ExemploPI {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // TODO code application logic here
         
         File arquivo = new File("tabela.csv");
         byte[] arrayDeBytes = new byte[(int)arquivo.length()];
@@ -35,8 +23,8 @@ public class ExemploPI {
             JOptionPane.showMessageDialog(null, "Erro de leitura do arquivo.");
         }
         String conteudo = new String(arrayDeBytes);
-//        System.out.println(conteudo);
-
+        
+        
         // Carrego o driver do banco de dados.
         Statement stmt = null;
         try {
@@ -63,23 +51,18 @@ public class ExemploPI {
             while(st1.hasMoreTokens()) {
                 String coluna = st1.nextToken();
                 matriz[l][c] = coluna;
-//                System.out.print(matriz[l][c]+"\t");
                 c++;
-//                System.out.println(c++ +"º coluna: "+coluna+"    ");
             }
             l++;
-//            System.out.println("");
+
         }
-//        for(int i = 0; i < l; i++) {
-//            System.out.println(matriz[i][1]+"\t"+matriz[i][5]+"\t"+matriz[i][11]+"\t"+matriz[i][17]);
-////            System.out.println(matriz[i][1]);
-//        }
+
         for(int i = 1; i < l; i++) {
-            String sql = "INSERT INTO tabela VALUES ('"+matriz[i][1]+"', '"+matriz[i][5]+"', '"+matriz[i][11]+"', '"+matriz[i][17]+"');";
+            if(matriz[i][4] == "DF"){                      //    id               nome             situação              cep                         ENDEREÇO               percentual de exec      data prevista    perccentual pago      total pago           
+                String sql = "INSERT INTO tabela VALUES ("+matriz[i][0]+", '"+matriz[i][1]+"','"+matriz[i][2]+"', '"+matriz[i][5]+"', '"+matriz[i][3]+" - "+matriz[i][7]+"',"+matriz[i][11]+", '"+matriz[i][12]+"', "+matriz[i][46]+", "+matriz[i][55]+");";
+            }
             try {
                 stmt.executeUpdate(sql);
-//            System.out.println(matriz[i][1]+"\t"+matriz[i][5]+"\t"+matriz[i][11]+"\t"+matriz[i][17]);
-//            System.out.println(matriz[i][1]);
             } catch (SQLException ex) {
                 System.out.println("Erro na conexão JDBC");
             }
